@@ -33,7 +33,9 @@
                                             <td>{{$tag->id}}</td>
                                             <td>{{$tag->name}}</td>
                                             <td><a href="{{route('tags.edit',$tag->id)}}" class="btn btn-warning"> <i class="fa-solid fa-pen"></i></a>
-                                                <button data-tag-id="{{$tag->id}}" class="delete-tag btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                                {{-- <button data-tag-id="{{$tag->id}}" class="delete-tag btn btn-danger"><i class="fa-solid fa-trash"></i></button> --}}
+                                                <button data-delete-route="{{route('tags.destroy',$tag->id)}}" class="delete-tag btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+
                                             </td>
                                         </tr>
                                         @endforeach
@@ -72,7 +74,7 @@
       </div>
     </div>
   </div>
-<script>
+{{-- <script>
     const deleteBtn = document.querySelectorAll('.delete-tag');
     deleteBtn.forEach((btn)=> btn.addEventListener('click', deleteTag));
     function deleteTag() {
@@ -84,5 +86,9 @@
         deleteModal.show();
         // console.log("Delete Pressed!!");
     }
-</script>
+</script> --}}
+@endsection
+
+@section('page-level-scripts')
+    <script src="{{asset('admin/js/page-level/tags/index.js')}}"></script>
 @endsection
