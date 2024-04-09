@@ -28,4 +28,18 @@ class Post extends Model
     public function author() {
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function scopePublished($query) {
+        return $query->whereNotNull('published_at');
+    }
+
+    public function scopeSearch($query) {
+        $searchKey = request('search');
+
+        if($searchKey) {
+            $query = $query->where('title','like',"%${searchKey}%");
+        }
+        return $query;
+    }
+
 }

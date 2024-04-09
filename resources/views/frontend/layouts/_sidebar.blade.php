@@ -6,8 +6,10 @@
     <div class="pr25 pl25 clearfix">
         <form action="#">
             <div class="blog-sidebar-form-search">
-                <input type="text" name="search" class="" placeholder="e.g. Javascript">
-                <button type="submit" name="submit" class="pull-right"><i class="fa fa-search"></i></button>
+                <input type="text" name="search" class="" placeholder="e.g. Javascript" value="{{ request('search') }}">
+                <button type="submit" name="submit" class="pull-right">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </form>
 
@@ -24,10 +26,11 @@
         <ul class="blog-sidebar pl25">
             @foreach ($categories as $category)
                 <li>
-                    <a href="">
+                    <a href=" {{ route('blogs.category',$category)}}">
                         {{ $category->name }}
                         <span class="badge badge-pasific pull-right">
-                            {{ $category->posts->count() }}
+                            {{ $category->posts()->published()->count() }}
+                            {{-- yeh bahut querys chala raha count laane ke jagah sab posts laa raha ajiski wajah se ram full ho raha woh next project me solve hoga --}}
                         </span>
                     </a>
                 </li>
