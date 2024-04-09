@@ -9,7 +9,23 @@ class Post extends Model
 {
     use HasFactory;
 
+
+    protected function casts(): array
+    {
+        return [
+            'published_at'=>'datetime',
+        ];
+    }
+
     public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function author() {
+        return $this->belongsTo(User::class,'user_id');
     }
 }
