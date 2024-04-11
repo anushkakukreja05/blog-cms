@@ -38,18 +38,20 @@
                                         <tr >
                                             <td>{{$post->id}}</td>
                                             <td>
-                                                <img src="{{ asset($post->image_path)}}" alt="{{ $post->title }}" style="max-width: 100px">
+                                                <img src="{{ asset($post->image)}}" alt="{{ $post->title }}" style="max-width: 100px">
                                             </td>
                                             <td>{{Str::limit($post->title,10)}}</td>
                                             <td>{{Str::limit($post->excerpt,10)}}</td>
-                                            <td>{{Str::limit($post->body,10)}}</td>
+                                            <td>{!!Str::limit($post->body,10)!!}</td>
                                             <td>{!! $post->status !!}</td>
                                             {{-- {{!! so that it render html as well!!}} --}}
                                             <td>{{$post->category->name}}</td>
                                             <td>{{$post->author->name}}</td>
                                             <td><a href="{{route('posts.edit',$post)}}" class="btn btn-warning"> <i class="fa-solid fa-pen"></i></a>
                                                 <button data-delete-route="{{route('posts.destroy',$post)}}" class="delete-post btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-
+                                                @if(!$post->is_published)
+                                                <button data-publish-route="{{route('posts.publish',$post)}}" class="publish-post btn btn-info"><i class="fa-solid fa-upload"></i></button>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -88,19 +90,32 @@
       </div>
     </div>
   </div>
-{{-- <script>
-    const deleteBtn = document.querySelectorAll('.delete-post');
-    deleteBtn.forEach((btn)=> btn.addEventListener('click', deletepost));
-    function deletepost() {
-        const postId = this.dataset.postId;
-        const route = `/posts/${postId}`;
-        const deleteForm = document.querySelector('#deleteForm');
-        deleteForm.setAttribute('action', route);
-        const deleteModal = new bootstrap.Modal('#deleteModal');
-        deleteModal.show();
-        // console.log("Delete Pressed!!");
-    }
-</script> --}}
+
+
+  {{-- Publish modal --}}
+  <div class="modal fade" id="publishModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Publish post?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to publish this post right now?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="" class="d-inline-block" id="publishForm" method="POST">
+            @csrf
+            @method('PUT')
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('page-level-scripts')

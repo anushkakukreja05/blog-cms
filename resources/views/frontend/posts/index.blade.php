@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <img src="{{ asset($post->image_path)}}" alt="Blog Image" class="img-responsive">
+                    <img src="{{ asset($post->image)}}" alt="Blog Image" class="img-responsive">
                     <p class="lead mt25">
                         {{ $post->excerpt}}
                     </p>
@@ -33,8 +33,8 @@
                         Sometimes when you innovate, you make mistakes. It is best to admit them quickly, and get on with improving your other innovations.
                         <footer><i class="fa fa-quote-right mt25"></i> Steve Job</footer>
                     </blockquote> --}}
-                    <p>
-                        {{ $post->body }}
+                    <p class="lead mt25">
+                        {!!$post->body !!}
                     </p>
                     {{-- <h4 class="mt25 mb25">Heading Title Three</h4> --}}
                     {{-- <p>

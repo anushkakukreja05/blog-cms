@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
+
+
 
 class UpdatePostRequest extends FormRequest
 {
@@ -11,7 +15,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +26,16 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title'=>'required',
+            'excerpt'=>'required',
+            'body'=>'required',
+            'category_id'=>'required',
+            'image'=>[
+                File::image()
+                    ->min(1)
+                    ->max('1mb')
+                    ->dimensions(Rule::dimensions()->maxWidth(2500)->maxHeight(2500)),
+            ]
         ];
     }
 }

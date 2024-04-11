@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\Tag;
+use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 
 class PostsController extends Controller
@@ -31,7 +35,7 @@ class PostsController extends Controller
             'image_path'=>$image,
             'user_id'=> 1
         ]);
-
+        // dd($post->tags());
         $post->tags()->attach($request->tags);
 
         return redirect(route('posts.index'))->with('success','Post Created successfully!');
@@ -43,7 +47,7 @@ class PostsController extends Controller
         return view('admin-panel.posts.edit',compact(['post','categories','tags']));
     }
 
-    public function update(Request $request,Post $post) {
+    public function update(UpdatePostRequest $request,Post $post) {
         $data = $request->only(['title','excerpt','body','published_at','category_id']);
 
         if($request->hasFile('image')) {
@@ -57,7 +61,7 @@ class PostsController extends Controller
         return(redirect(route('posts.index')));
     }
 
-    public function publish (Request $request,Post $post) {
+    public function publish (Request $request,Post $post) { 
         $post->published_at = now();
         $post->save();
         session()->flash('success','Post updated successfully!');
