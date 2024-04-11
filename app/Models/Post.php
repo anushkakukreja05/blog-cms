@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class Post extends Model
 {
@@ -46,4 +48,15 @@ class Post extends Model
         return $query;
     }
 
+    public function getIsPublishedAttribute() {
+        return $this->published_at !== null;
+    }
+
+    public function getImageAttribute() {
+        return 'storage/'.$this->image_path;
+    }
+
+    public function deleteImage(): bool {
+        return Storage::delete($this->image_path);
+    }
 }
