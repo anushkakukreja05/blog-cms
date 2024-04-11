@@ -29,6 +29,10 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function getStatusAttribute() {
+        return $this->published_at == null ? "<span class='badge bg-warning'>Draft</span>" : "<span class='badge bg-success'>Published</span>";
+    }
+
     public function scopePublished($query) {
         return $query->whereNotNull('published_at');
     }

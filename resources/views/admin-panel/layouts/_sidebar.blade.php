@@ -18,7 +18,7 @@
                 </a>
 
                 <div class="sb-sidenav-menu-heading">Blogs</div>
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('posts.index')}}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-rss"></i></div>
                     Posts
                 </a>

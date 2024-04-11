@@ -36,4 +36,24 @@ class FrontendController extends Controller
         $tags = Tag::limit(7)->get();
         return view('welcome',compact(['categories','tags','posts']));
     }
+
+    public function tag(Request $request, Tag $tag) {
+        $posts = $tag->posts()
+                            ->search()
+                            ->published()
+                            ->latest()
+                            ->simplePaginate(9);
+
+        $categories = Category::limit(5)->get();
+        $tags = Tag::limit(7)->get();
+        return view('welcome',compact(['categories','tags','posts']));
+    }
+
+    public function show(Request $request, Post $post) {
+        $categories = Category::limit(5)->get();
+        $tags = Tag::limit(7)->get();
+        $post_tags = $post->tags;
+
+        return view('frontend.posts.index',compact(['categories','tags','post','post_tags']));
+    }
 }
