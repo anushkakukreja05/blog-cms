@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
@@ -10,10 +12,23 @@ use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
 
-class PostsController extends Controller
+class PostsController extends Controller implements HasMiddleware
+
 {
+
+    public static function middleware() {
+        return [
+            new Middleware('verifyUserForEditAndDelete',only: ['edit','update','delete','publish']),
+        ];
+    }
     public function index() {
-        $posts = Post::latest('updated_at')->paginate(10);
+        if(auth()->user()->isAdmin()) {
+            $posts = Post::latest('updated_at')->paginate(10);
+        } else {
+            $posts = Post::where('user_id',auth()->id())
+                                    ->latest('updated_at')
+                                    ->paginate(10);
+        }
 
         return view('admin-panel.posts.index',compact(['posts']));
     }
@@ -61,10 +76,10 @@ class PostsController extends Controller
         return(redirect(route('posts.index')));
     }
 
-    public function publish (Request $request,Post $post) { 
+    public function publish (Request $request,Post $post) {
         $post->published_at = now();
         $post->save();
-        session()->flash('success','Post updated successfully!');
+        session()->flash('success','Post published successfully!');
         return (redirect(route('posts.index')));
     }
 

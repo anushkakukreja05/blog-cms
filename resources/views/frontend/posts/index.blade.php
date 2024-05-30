@@ -53,7 +53,7 @@
 
 
                 <div class="blog-post-author mb50 pt30 bt-solid-1">
-                    <img src="{{ asset('assets/img/other/photo-1.jpg') }}" class="img-circle" alt="image">
+                    <img src="{{ asset('admin/assets/img/other/photo-1.jpg') }}" class="img-circle" alt="image">
                     <span class="blog-post-author-name">{{ $post->author->name }}</span> <a href="https://twitter.com/booisme"><i class="fa fa-twitter"></i></a>
                     <p>
                         Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
@@ -65,7 +65,7 @@
                     <h5><i class="fa fa-comments-o mb25"></i> 20 Comments</h5>
 
                     <div class="blog-post-comment">
-                        <img src="assets/img/other/photo-2.jpg" class="img-circle" alt="image">
+                        <img src="{{ asset('admin/assets/img/other/photo-2.jpg') }}" class="img-circle" alt="image">
                         <span class="blog-post-comment-name">John Boo</span> Jan. 20 2016, 10:00 PM
                         <a href="#" class="pull-right text-gray"><i class="fa fa-comment"></i> Reply</a>
                         <p>
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="blog-post-comment">
-                        <img src="assets/img/other/photo-4.jpg" class="img-circle" alt="image">
+                        <img src=" {{ asset('admin/assets/img/other/photo-4.jpg') }}" class="img-circle" alt="image">
                         <span class="blog-post-comment-name">John Boo</span> Jan. 20 2016, 10:00 PM
                         <a href="#" class="pull-right text-gray"><i class="fa fa-comment"></i> Reply</a>
                         <p>
@@ -82,7 +82,7 @@
                         </p>
 
                         <div class="blog-post-comment-reply">
-                            <img src="assets/img/other/photo-2.jpg" class="img-circle" alt="image">
+                            <img src="{{ asset('admin/assets/img/other/photo-2.jpg') }}" class="img-circle" alt="image">
                             <span class="blog-post-comment-name">John Boo</span> Jan. 20 2016, 10:00 PM
                             <a href="#" class="pull-right text-gray"><i class="fa fa-comment"></i> Reply</a>
                             <p>
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="blog-post-comment">
-                        <img src="assets/img/other/photo-1.jpg" class="img-circle" alt="image">
+                        <img src="{{ asset('admin/assets/img/other/photo-1.jpg') }}" class="img-circle" alt="image">
                         <span class="blog-post-comment-name">John Boo</span> Jan. 20 2016, 10:00 PM
                         <a href="#" class="pull-right text-gray"><i class="fa fa-comment"></i> Reply</a>
                         <p>

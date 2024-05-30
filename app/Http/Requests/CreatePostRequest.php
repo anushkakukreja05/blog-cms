@@ -29,7 +29,7 @@ class CreatePostRequest extends FormRequest
             'title'=>'required',
             'excerpt'=>'required',
             'body'=>'required',
-            'category_id'=>'required',
+            'category_id'=>'required ',
             'image'=>['required',
                 File::image()
                     ->min(1)
