@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('image_path');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
+            $table->softDeletes('deleted_at');
 
             $table->foreign('user_id')
                   ->references('id')
@@ -31,7 +32,7 @@ return new class extends Migration
                   ->on('categories');
 
 
-        
+
         });
     }
 

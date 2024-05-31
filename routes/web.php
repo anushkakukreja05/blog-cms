@@ -16,8 +16,15 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::resource('tags', TagsController::class)->except(['show']);
 Route::resource('categories', CategoriesController::class)->except(['show']);
+
+Route::get('/posts/trashed',[PostsController::class,'trashed'])->name('posts.trashed');
+
 Route::resource('posts', PostsController::class);
 Route::put('posts/{post}/publish-now',[PostsController::class,'publish'])->name('posts.publish');
+
+Route::put('posts/trashed/{post}/restore',[PostsController::class,'restore'])->name('posts.restore');
+Route::delete('posts/trashed/{post}/destroy',[PostsController::class,'forceDelete'])->name('posts.forceDelete');
+
 });
 Route::get('/',[FrontendController::class,'index']);
 

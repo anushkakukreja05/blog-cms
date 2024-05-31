@@ -14,9 +14,16 @@ class ValidateUserForEditAndDelete
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {   if($request->post->user_id !== auth()->id()) {
-        return abort(401);
-    }
+    // if(is_object($post))
+    {   if(is_numeric($request->post)) {
+            $post = Post::onlyTrashed()->find($request->post);
+        }else {
+            $post = $request->post;
+        }
+
+        if(! auth()->user()->isAdmin() &&  $post->user_id !== auth()->id()) {
+            return abort(401);
+        }
         return $next($request);
     }
 }
