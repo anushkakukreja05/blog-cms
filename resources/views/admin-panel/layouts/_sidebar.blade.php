@@ -16,13 +16,17 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-gears"></i></div>
                     Categories
                 </a>
+                <a class="nav-link" href="{{route('users.index')}}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
+                    Users
+                </a>
 
                 <div class="sb-sidenav-menu-heading">Blogs</div>
                 <a class="nav-link" href="{{ route('posts.index')}}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-rss"></i></div>
                     Posts
                 </a>
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href=" {{ route('posts.trashed')}}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-trash"></i></div>
                     Trashed Posts
                 </a>

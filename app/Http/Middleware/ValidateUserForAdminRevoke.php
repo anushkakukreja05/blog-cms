@@ -5,10 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Post;
 
-
-class ValidateUserForEditAndDelete
+class ValidateUserForAdminRevoke
 {
     /**
      * Handle an incoming request.
@@ -16,15 +14,8 @@ class ValidateUserForEditAndDelete
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    // if(is_object($post))
-    {   if(is_numeric($request->post)) {
-            $post = Post::onlyTrashed()->find($request->post);
-        }else {
-            $post = $request->post;
-        }
-
-        if(!( (auth()->user()->isAdmin() || auth()->user()->isSuperAdmin()) &&  $post->user_id !== auth()->id())) {
-            return abort(401);
+    {   if(!auth()->user()->isSuperAdmin()) {
+        abort(401);
         }
         return $next($request);
     }

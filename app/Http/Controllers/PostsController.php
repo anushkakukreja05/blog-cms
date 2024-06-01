@@ -18,11 +18,11 @@ class PostsController extends Controller implements HasMiddleware
 
     public static function middleware() {
         return [
-            new Middleware('verifyUserForEditAndDelete',only: ['edit','update','delete','publish','forceDelete','restore']),
+            new Middleware('verifyUserForEditAndDelete',only: ['edit','update','destroy','publish','forceDelete','restore']),
         ];
     }
     public function index() {
-        if(auth()->user()->isAdmin()) {
+        if(auth()->user()->isAdmin() || auth()->user()->isSuperAdmin()) {
             $posts = Post::latest('updated_at')->paginate(10);
         } else {
             $posts = Post::where('user_id',auth()->id())
@@ -91,8 +91,8 @@ class PostsController extends Controller implements HasMiddleware
     }
 
     public function trashed() {
-        if(auth()->user()->isAdmin()) {
-            $posts=  Post::onlyTrashed()->paginate(10);
+        if(auth()->user()->isSuperAdmin() || auth()->user()->isAdmin()  ) {
+            $posts = Post::onlyTrashed()->paginate(10);
         } else {
             $posts = Post::onlyTrashed()->where('user_id',auth()->id())->paginate(10);
         }

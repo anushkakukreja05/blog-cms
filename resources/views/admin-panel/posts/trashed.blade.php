@@ -3,6 +3,7 @@
 
 @section('admin-content')
 
+
     <div class="container-fluid px-4 mt-4">
         <div class="row">
             <div class="col-md-12">
@@ -11,7 +12,7 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <svg class="svg-inline--fa fa-table me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path></svg>
-                                <h1 class="mt-4 d-inline">Posts</h1>
+                                <h1 class="mt-4 d-inline">Trashed Posts</h1>
                             </div>
                             <a href="{{route('posts.create')}}" class="btn btn-outline-primary">Add Post</a>
                         </div>
@@ -48,7 +49,7 @@
                                             <td>{{$post->category->name}}</td>
                                             <td>{{$post->author->name}}</td>
                                             <td>
-                                                <button data-restore-route="{{route('posts.restore',$post)}}" class="restore-post btn btn-warning"><i class="fa-solid fa-recycle"></i></button>
+                                                <button data-restore-route="{{route('posts.restore',$post)}}" class="restore-post btn btn-warning" title="Restore"><i class="fa-solid fa-recycle"></i></button>
 
                                                 <button data-delete-route="{{route('posts.forceDelete',$post)}}" class="delete-post btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                                                 @if(!$post->is_published)

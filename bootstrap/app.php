@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'verifyUserForEditAndDelete'=> \App\Http\Middleware\ValidateUserForEditAndDelete::class
+            'verifyUserForEditAndDelete'=> \App\Http\Middleware\ValidateUserForEditAndDelete::class,
+            'validateUserForAdminAccess'=>\App\Http\Middleware\ValidateUserForAdminAccess::class,
+            'validateUserForAdminRevoke'=>\App\Http\Middleware\ValidateUserForAdminRevoke::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
