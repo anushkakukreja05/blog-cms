@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
@@ -22,7 +23,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('categories', CategoriesController::class)->except(['show']);
 
     Route::get('/posts/trashed',[PostsController::class,'trashed'])->name('posts.trashed');
-   
+
 
 
 
@@ -34,6 +35,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 });
 Route::get('/',[FrontendController::class,'index']);
+Route::resource('comments', CommentsController::class);
 
 Route::get('/categories/{category}',[FrontendController::class,'category'])->name('blogs.category');
 Route::get('/tags/{tag}',[FrontendController::class,'tag'])->name('blogs.tag');

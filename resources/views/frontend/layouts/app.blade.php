@@ -103,6 +103,7 @@
             </div>
 
         </div>
+        @include('frontend.layouts._alert')
     </header>
 
     <!-- Blog Area

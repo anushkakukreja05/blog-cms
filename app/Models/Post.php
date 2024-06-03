@@ -33,6 +33,10 @@ class Post extends Model
     public function author() {
         return $this->belongsTo(User::class,'user_id');
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     public function getStatusAttribute() {
         return $this->published_at == null ? "<span class='badge bg-warning'>Draft</span>" : "<span class='badge bg-success'>Published</span>";

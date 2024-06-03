@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Post;
+use App\Models\Comment;
+
 
 
 
@@ -21,7 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Anushka Kukreja',
@@ -43,5 +45,10 @@ class DatabaseSeeder extends Seeder
                                         ->toArray()
                                 );
                             });
+
+        Comment::factory(150)->create();
+
+        Comment::factory(70)->create();
+
     }
 }

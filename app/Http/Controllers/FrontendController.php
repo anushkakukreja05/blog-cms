@@ -53,7 +53,10 @@ class FrontendController extends Controller
         $categories = Category::limit(5)->get();
         $tags = Tag::limit(7)->get();
         $post_tags = $post->tags;
+        $comments = $post->comments;
+        $user = auth()->user();
+      
 
-        return view('frontend.posts.index',compact(['categories','tags','post','post_tags']));
+        return view('frontend.posts.index',compact(['categories','tags','post','post_tags','comments','user']));
     }
 }
